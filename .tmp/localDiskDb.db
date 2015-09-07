@@ -1,0 +1,425 @@
+{
+  "data": {
+    "address": [],
+    "calendar": [],
+    "calendarevent": [],
+    "geometry": [],
+    "household": [],
+    "householdnetwork": [],
+    "invitation": [],
+    "person": [],
+    "response": [],
+    "stuff": [],
+    "type": [],
+    "user": [],
+    "household_members__person_members_person": [],
+    "address_addresses_address__householdnetwork_addresses": [],
+    "household_hosts_household__invitation_hosts": [],
+    "household_invitees_household__invitation_invitees": []
+  },
+  "schema": {
+    "address": {
+      "houseNumber": {
+        "type": "string"
+      },
+      "street": {
+        "type": "string"
+      },
+      "city": {
+        "type": "string"
+      },
+      "zipCode": {
+        "type": "string"
+      },
+      "country": {
+        "type": "string"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "calendar": {
+      "start": {
+        "type": "datetime"
+      },
+      "end": {
+        "type": "datetime"
+      },
+      "recurringCycle": {
+        "type": "integer"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "calendarevent": {
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "geometry": {
+      "coordinates": {
+        "type": "array"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "household": {
+      "address": {
+        "type": "integer",
+        "model": "address",
+        "foreignKey": true,
+        "alias": "address"
+      },
+      "photos": {
+        "type": "array"
+      },
+      "website": {
+        "type": "string"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "householdnetwork": {
+      "geometry": {
+        "type": "integer",
+        "model": "geometry",
+        "foreignKey": true,
+        "alias": "geometry"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "invitation": {
+      "type": {
+        "type": "integer",
+        "model": "type",
+        "foreignKey": true,
+        "alias": "type"
+      },
+      "open": {
+        "type": "boolean"
+      },
+      "inviteesCanInvite": {
+        "type": "boolean",
+        "defaultsTo": false
+      },
+      "description": {
+        "type": "string"
+      },
+      "calendar": {
+        "type": "integer",
+        "model": "calendar",
+        "foreignKey": true,
+        "alias": "calendar"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "person": {
+      "firstName": {
+        "type": "string"
+      },
+      "lastName": {
+        "type": "string"
+      },
+      "age": {
+        "type": "integer"
+      },
+      "gender": {
+        "type": "string",
+        "enum": [
+          "male",
+          "female"
+        ]
+      },
+      "photo": {
+        "type": "string"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "response": {
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "stuff": {
+      "type": {
+        "type": "integer",
+        "model": "type",
+        "foreignKey": true,
+        "alias": "type"
+      },
+      "description": {
+        "type": "string"
+      },
+      "free": {
+        "type": "boolean"
+      },
+      "price": {
+        "type": "float"
+      },
+      "calendar": {
+        "type": "integer",
+        "model": "calendar",
+        "foreignKey": true,
+        "alias": "calendar"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "type": {
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "user": {
+      "person": {
+        "type": "integer",
+        "model": "person",
+        "foreignKey": true,
+        "alias": "person"
+      },
+      "email": {
+        "type": "string",
+        "unique": true
+      },
+      "phone": {
+        "type": "string"
+      },
+      "password": {
+        "type": "string"
+      },
+      "address": {
+        "type": "integer",
+        "model": "address",
+        "foreignKey": true,
+        "alias": "address"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "household_members__person_members_person": {
+      "id": {
+        "primaryKey": true,
+        "unique": true,
+        "autoIncrement": true,
+        "type": "integer"
+      },
+      "household_members": {
+        "type": "integer",
+        "foreignKey": true,
+        "references": "household",
+        "on": "id",
+        "via": "person_members_person"
+      },
+      "person_members_person": {
+        "type": "integer",
+        "foreignKey": true,
+        "references": "person",
+        "on": "id",
+        "via": "household_members"
+      }
+    },
+    "address_addresses_address__householdnetwork_addresses": {
+      "id": {
+        "primaryKey": true,
+        "unique": true,
+        "autoIncrement": true,
+        "type": "integer"
+      },
+      "householdnetwork_addresses": {
+        "type": "integer",
+        "foreignKey": true,
+        "references": "householdnetwork",
+        "on": "id",
+        "via": "address_addresses_address"
+      },
+      "address_addresses_address": {
+        "type": "integer",
+        "foreignKey": true,
+        "references": "address",
+        "on": "id",
+        "via": "householdnetwork_addresses"
+      }
+    },
+    "household_hosts_household__invitation_hosts": {
+      "id": {
+        "primaryKey": true,
+        "unique": true,
+        "autoIncrement": true,
+        "type": "integer"
+      },
+      "invitation_hosts": {
+        "type": "integer",
+        "foreignKey": true,
+        "references": "invitation",
+        "on": "id",
+        "via": "household_hosts_household"
+      },
+      "household_hosts_household": {
+        "type": "integer",
+        "foreignKey": true,
+        "references": "household",
+        "on": "id",
+        "via": "invitation_hosts"
+      }
+    },
+    "household_invitees_household__invitation_invitees": {
+      "id": {
+        "primaryKey": true,
+        "unique": true,
+        "autoIncrement": true,
+        "type": "integer"
+      },
+      "invitation_invitees": {
+        "type": "integer",
+        "foreignKey": true,
+        "references": "invitation",
+        "on": "id",
+        "via": "household_invitees_household"
+      },
+      "household_invitees_household": {
+        "type": "integer",
+        "foreignKey": true,
+        "references": "household",
+        "on": "id",
+        "via": "invitation_invitees"
+      }
+    }
+  },
+  "counters": {
+    "address": {},
+    "calendar": {},
+    "calendarevent": {},
+    "geometry": {},
+    "household": {},
+    "householdnetwork": {},
+    "invitation": {},
+    "person": {},
+    "response": {},
+    "stuff": {},
+    "type": {},
+    "user": {},
+    "household_members__person_members_person": {},
+    "address_addresses_address__householdnetwork_addresses": {},
+    "household_hosts_household__invitation_hosts": {},
+    "household_invitees_household__invitation_invitees": {}
+  }
+}
