@@ -1,5 +1,5 @@
 /**
-* HouseHold.js
+* Person.js
 *
 * @description :: TODO: You might write a short summary of how this model works and what it represents here.
 * @docs        :: http://sailsjs.org/#!documentation/models
@@ -8,25 +8,23 @@
 module.exports = {
 
   attributes: {
-    name:{
-      type:'string'
-    },
-    address: {
-      model: 'Address',
-      required: true
-    },
-    photos:{
-      type:'array'
-    },
-    website:{
+    firstName:{
       type:'string',
-      url:true
+      required:true
     },
-    members: {
-      collection: 'Person'
+    lastName:{
+      type:'string',
+      required:true
     },
-    network: {
-      model:'HouseHoldNetwork'
+    age:{
+      type:'integer'
+    },
+    gender:{
+      type:'string',
+      enum:['male','female']
+    },
+    photo:{
+      type:'string'
     }
   }
 };

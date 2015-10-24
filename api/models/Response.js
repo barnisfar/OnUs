@@ -9,6 +9,23 @@ module.exports = {
 
   attributes: {
 
+  	invitation: {
+  	    model:'Invitation',
+  	    required:true
+  	},
+  	houseHold: {
+  	    model:'HouseHold',
+  	    required:true
+  	},
+  	suggestedEvent:{
+  	    model:'CalendarEvent'
+  	},
+  	hostConfirmed: {
+  	    type:'boolean'
+  	},
+  	inviteeConfirmed: {
+  	    type:'boolean'
+  	}
   }
 };
 

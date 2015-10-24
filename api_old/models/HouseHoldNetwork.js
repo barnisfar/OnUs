@@ -13,12 +13,6 @@ module.exports = {
     },
     geometry: {
       model: 'Geometry'
-    },
-    blocked: {
-      collection: 'HouseHold'
-    },
-    preferred: {
-      collection: 'HouseHold'
     }
   }
 };
