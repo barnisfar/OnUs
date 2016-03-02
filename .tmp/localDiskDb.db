@@ -11,11 +11,81 @@
     "response": [],
     "stuff": [],
     "type": [],
-    "user": [],
+    "user": [
+      {
+        "auth": 1,
+        "createdAt": "2015-11-14T21:09:01.842Z",
+        "updatedAt": "2015-11-14T21:09:01.842Z",
+        "id": 1
+      }
+    ],
     "household_members__person_members_person": [],
     "address_addresses_address__householdnetwork_addresses": [],
     "household_hosts_household__invitation_hosts": [],
-    "household_invitees_household__invitation_invitees": []
+    "household_invitees_household__invitation_invitees": [],
+    "attempt": [
+      {
+        "user": 1,
+        "successful": true,
+        "ip": "10.240.0.53",
+        "port": "59073",
+        "createdAt": "2015-11-14T21:09:01.945Z",
+        "updatedAt": "2015-11-14T21:09:01.945Z",
+        "id": 1
+      },
+      {
+        "user": 1,
+        "successful": false,
+        "ip": "10.240.0.3",
+        "port": "55186",
+        "createdAt": "2015-11-14T21:11:47.528Z",
+        "updatedAt": "2015-11-14T21:11:47.528Z",
+        "id": 2
+      },
+      {
+        "user": 1,
+        "successful": true,
+        "ip": "10.240.0.79",
+        "port": "46982",
+        "createdAt": "2015-11-14T21:12:55.519Z",
+        "updatedAt": "2015-11-14T21:12:55.519Z",
+        "id": 3
+      },
+      {
+        "user": 1,
+        "successful": true,
+        "ip": "10.240.0.88",
+        "port": "35309",
+        "createdAt": "2015-11-14T21:13:11.481Z",
+        "updatedAt": "2015-11-14T21:13:11.481Z",
+        "id": 4
+      }
+    ],
+    "auth": [
+      {
+        "password": "$2a$10$rNOVd8iN.FPqgwCIW64iFOkETjjs75RvCdTFJ8Z6SM7W5nVpSJSzS",
+        "email": "daniel@muckup.dk",
+        "createdAt": "2015-11-14T21:09:01.817Z",
+        "updatedAt": "2015-11-14T21:09:01.852Z",
+        "id": 1,
+        "user": 1
+      }
+    ],
+    "jwt": [
+      {
+        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIxfHVuZGVmaW5lZCIsInN1YiI6InN1YmplY3QiLCJhdWQiOiJhcHAgbmFtZSIsImV4cCI6MTQ0ODE0MDYyNjIwOCwibmJmIjoxNDQ3NTM1ODI2MjEwLCJpYXQiOjE0NDc1MzU4MjYyMTAsImp0aSI6IjBlYjZjMDIwLThiMTUtMTFlNS1iYzZkLTAxYjQ0MjQ0MmNmOCJ9.0CCqrZ6hLG2ePLQZRv-GvyisK2fNF-RMaBQseN47JP8",
+        "owner": 1,
+        "revoked": false,
+        "createdAt": "2015-11-14T21:17:06.213Z",
+        "updatedAt": "2015-11-14T21:17:06.227Z",
+        "id": 1
+      }
+    ],
+    "resettoken": [],
+    "use": [],
+    "calendar_events__calendarevent_events_calendarevent": [],
+    "household_blocked_household__householdnetwork_blocked": [],
+    "household_preferred_household__householdnetwork_preferred": []
   },
   "schema": {
     "address": {
@@ -48,15 +118,6 @@
       }
     },
     "calendar": {
-      "start": {
-        "type": "datetime"
-      },
-      "end": {
-        "type": "datetime"
-      },
-      "recurringCycle": {
-        "type": "integer"
-      },
       "id": {
         "type": "integer",
         "autoIncrement": true,
@@ -71,6 +132,15 @@
       }
     },
     "calendarevent": {
+      "start": {
+        "type": "datetime"
+      },
+      "end": {
+        "type": "datetime"
+      },
+      "recurringCycle": {
+        "type": "integer"
+      },
       "id": {
         "type": "integer",
         "autoIncrement": true,
@@ -102,6 +172,9 @@
       }
     },
     "household": {
+      "name": {
+        "type": "string"
+      },
       "address": {
         "type": "integer",
         "model": "address",
@@ -113,6 +186,12 @@
       },
       "website": {
         "type": "string"
+      },
+      "network": {
+        "type": "integer",
+        "model": "householdnetwork",
+        "foreignKey": true,
+        "alias": "network"
       },
       "id": {
         "type": "integer",
@@ -217,6 +296,30 @@
       }
     },
     "response": {
+      "invitation": {
+        "type": "integer",
+        "model": "invitation",
+        "foreignKey": true,
+        "alias": "invitation"
+      },
+      "houseHold": {
+        "type": "integer",
+        "model": "household",
+        "foreignKey": true,
+        "alias": "houseHold"
+      },
+      "suggestedEvent": {
+        "type": "integer",
+        "model": "calendarevent",
+        "foreignKey": true,
+        "alias": "suggestedEvent"
+      },
+      "hostConfirmed": {
+        "type": "boolean"
+      },
+      "inviteeConfirmed": {
+        "type": "boolean"
+      },
       "id": {
         "type": "integer",
         "autoIncrement": true,
@@ -266,6 +369,12 @@
       }
     },
     "type": {
+      "name": {
+        "type": "string"
+      },
+      "icon": {
+        "type": "string"
+      },
       "id": {
         "type": "integer",
         "autoIncrement": true,
@@ -280,27 +389,17 @@
       }
     },
     "user": {
+      "auth": {
+        "type": "integer",
+        "model": "auth",
+        "foreignKey": true,
+        "alias": "auth"
+      },
       "person": {
         "type": "integer",
         "model": "person",
         "foreignKey": true,
         "alias": "person"
-      },
-      "email": {
-        "type": "string",
-        "unique": true
-      },
-      "phone": {
-        "type": "string"
-      },
-      "password": {
-        "type": "string"
-      },
-      "address": {
-        "type": "integer",
-        "model": "address",
-        "foreignKey": true,
-        "alias": "address"
       },
       "id": {
         "type": "integer",
@@ -402,6 +501,208 @@
         "on": "id",
         "via": "invitation_invitees"
       }
+    },
+    "attempt": {
+      "user": {
+        "type": "integer",
+        "model": "user",
+        "foreignKey": true,
+        "alias": "user"
+      },
+      "successful": {
+        "type": "boolean",
+        "defaultsTo": false
+      },
+      "ip": {
+        "type": "string"
+      },
+      "port": {
+        "type": "string"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "auth": {
+      "user": {
+        "type": "integer",
+        "model": "user",
+        "foreignKey": true,
+        "alias": "user"
+      },
+      "email": {
+        "type": "string",
+        "unique": true
+      },
+      "password": {
+        "type": "string"
+      },
+      "resetToken": {
+        "type": "integer",
+        "model": "resettoken",
+        "foreignKey": true,
+        "alias": "resetToken"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "jwt": {
+      "token": {
+        "type": "text"
+      },
+      "owner": {
+        "type": "integer",
+        "model": "user",
+        "foreignKey": true,
+        "alias": "owner"
+      },
+      "revoked": {
+        "type": "boolean",
+        "defaultsTo": false
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "resettoken": {
+      "token": {
+        "type": "text"
+      },
+      "owner": {
+        "type": "integer",
+        "model": "auth",
+        "foreignKey": true,
+        "alias": "owner"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "use": {
+      "remoteAddress": {
+        "type": "string"
+      },
+      "jsonWebToken": {
+        "type": "integer",
+        "model": "jwt",
+        "foreignKey": true,
+        "alias": "jsonWebToken"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "calendar_events__calendarevent_events_calendarevent": {
+      "id": {
+        "primaryKey": true,
+        "unique": true,
+        "autoIncrement": true,
+        "type": "integer"
+      },
+      "calendar_events": {
+        "type": "integer",
+        "foreignKey": true,
+        "references": "calendar",
+        "on": "id",
+        "via": "calendarevent_events_calendarevent"
+      },
+      "calendarevent_events_calendarevent": {
+        "type": "integer",
+        "foreignKey": true,
+        "references": "calendarevent",
+        "on": "id",
+        "via": "calendar_events"
+      }
+    },
+    "household_blocked_household__householdnetwork_blocked": {
+      "id": {
+        "primaryKey": true,
+        "unique": true,
+        "autoIncrement": true,
+        "type": "integer"
+      },
+      "householdnetwork_blocked": {
+        "type": "integer",
+        "foreignKey": true,
+        "references": "householdnetwork",
+        "on": "id",
+        "via": "household_blocked_household"
+      },
+      "household_blocked_household": {
+        "type": "integer",
+        "foreignKey": true,
+        "references": "household",
+        "on": "id",
+        "via": "householdnetwork_blocked"
+      }
+    },
+    "household_preferred_household__householdnetwork_preferred": {
+      "id": {
+        "primaryKey": true,
+        "unique": true,
+        "autoIncrement": true,
+        "type": "integer"
+      },
+      "householdnetwork_preferred": {
+        "type": "integer",
+        "foreignKey": true,
+        "references": "householdnetwork",
+        "on": "id",
+        "via": "household_preferred_household"
+      },
+      "household_preferred_household": {
+        "type": "integer",
+        "foreignKey": true,
+        "references": "household",
+        "on": "id",
+        "via": "householdnetwork_preferred"
+      }
     }
   },
   "counters": {
@@ -416,10 +717,26 @@
     "response": {},
     "stuff": {},
     "type": {},
-    "user": {},
+    "user": {
+      "id": 1
+    },
     "household_members__person_members_person": {},
     "address_addresses_address__householdnetwork_addresses": {},
     "household_hosts_household__invitation_hosts": {},
-    "household_invitees_household__invitation_invitees": {}
+    "household_invitees_household__invitation_invitees": {},
+    "attempt": {
+      "id": 4
+    },
+    "auth": {
+      "id": 1
+    },
+    "jwt": {
+      "id": 1
+    },
+    "resettoken": {},
+    "use": {},
+    "calendar_events__calendarevent_events_calendarevent": {},
+    "household_blocked_household__householdnetwork_blocked": {},
+    "household_preferred_household__householdnetwork_preferred": {}
   }
 }

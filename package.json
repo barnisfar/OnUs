@@ -21,8 +21,8 @@
   },
   "name": "onusapi",
   "private": true,
-  "version": "0.0.0",
-  "description": "a Sails application",
+  "version": "0.1.0",
+  "description": "Coffee on us",
   "keywords": [],
   "scripts": {
     "debug": "node debug app.js",
